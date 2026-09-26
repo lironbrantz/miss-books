@@ -1,6 +1,4 @@
-
-
-export function Home() {
+export function HomePage() {
     return (
         <section>
             <h2>Miss Books</h2>
