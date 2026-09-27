@@ -35,12 +35,12 @@ export function BookIndex() {
     return (
         <section className="book-index">
             <h1>Books Index</h1>
-               {selectedBookId ? <BookDetails bookId={selectedBookId} />
-               : <React.Fragment>
-            <BookFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
-            <BookList books={books} onRemoveBook={onRemoveBook} onSelectedBook={onSelectedBook} />
-               </React.Fragment>
-               }
+            {selectedBookId ? <BookDetails bookId={selectedBookId} />
+                : <React.Fragment>
+                    <BookFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
+                    <BookList books={books} onRemoveBook={onRemoveBook} onSelectedBook={onSelectedBook} />
+                 </React.Fragment>
+            }
         </section>
     )
 }
