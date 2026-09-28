@@ -1,5 +1,45 @@
 .app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-block: 1.2em;
+
     background-color: var(--clr1);
-    color: var(--clr1bg);
-    padding-block: 1em;
+    color: white;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+}
+
+.app-header h1 {
+    margin: 0;
+    color: white;
+    font-size: 2rem;
+}
+
+.app-header nav {
+    display: flex;
+    gap: .5em;
+}
+
+.app-header button {
+    margin: 0;
+
+    border: 1px solid rgba(255, 255, 255, .35);
+
+    background-color: transparent;
+    color: white;
+}
+
+.app-header button:hover {
+    border-color: white;
+    background-color: white;
+    color: var(--clr1);
+}
+
+@media (max-width: 600px) {
+    .app-header {
+        flex-direction: column;
+        gap: 1em;
+    }
 }

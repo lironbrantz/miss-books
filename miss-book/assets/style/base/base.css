@@ -1,13 +1,16 @@
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
+    font-family: 'DM Sans', sans-serif;
 }
 
 body {
-  margin: 0;
-  color: var(--gray3);
+    margin: 0;
+    background-color: var(--gray1);
+    color: var(--gray3);
+    line-height: 1.5;
 }
 
 h1,
@@ -16,30 +19,27 @@ h3,
 h4,
 h5,
 h6 {
-  margin: .5em 0 .5em;
-  font-family: 'Edu VIC WA NT Beginner', cursive;
+    margin: .5em 0;
+    font-family: 'Playfair Display', serif;
+    color: var(--clr1);
 }
 
 p {
-  margin: 0 0 1em;
+    margin: 0 0 1em;
 }
 
 a {
-  text-decoration: none;
-  color: unset;
+    color: unset;
+    text-decoration: none;
 }
 
-
-
-/* Dont stretch my Media */
 img,
 embed,
 video,
 object {
-  max-width: 100%
+    max-width: 100%;
 }
 
-/* Simple and useful CSS Debugging Technique */
 .debug * {
-  outline: 1px solid gold
+    outline: 1px solid gold;
 }

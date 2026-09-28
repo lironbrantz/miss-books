@@ -1,0 +1,10 @@
+.about-us h2 {
+    margin-top: 0;
+    font-size: 2.2rem;
+}
+
+.about-us p {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}

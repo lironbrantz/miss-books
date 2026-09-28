@@ -1,0 +1,25 @@
+.long-txt {
+    margin: 1.2em 0;
+}
+
+.long-txt p {
+    margin-bottom: .4em;
+
+    color: #4c4c4c;
+    line-height: 1.7;
+}
+
+.long-txt button {
+    margin: 0;
+    padding: 0;
+
+    background: none;
+    color: var(--clr2);
+
+    font-weight: 700;
+}
+
+.long-txt button:hover {
+    background: none;
+    color: var(--clr1);
+}

@@ -1,11 +1,26 @@
 .main-layout {
     margin: 0 auto;
-    padding-left: 1.6rem;
-    padding-right: 1.6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .container {
-    max-width: 800px;
-    padding: 1em;
+    max-width: 900px;
     margin: auto;
+    padding: 2em;
+}
+
+.home-page,
+.about-us {
+    max-width: 900px;
+    margin: 4em auto;
+    padding: 2.5em;
+
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.home-page {
+    text-align: center;
 }

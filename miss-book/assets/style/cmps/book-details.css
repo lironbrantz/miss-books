@@ -1,7 +1,123 @@
+.book-details {
+    max-width: 900px;
+    margin: 2em auto 3em;
+    padding: 2em;
+
+    background-color: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .06);
+}
+
+.back-btn {
+    margin: 0 0 1.5em;
+}
+
+.details-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5em;
+}
+
+.details-main > img {
+    width: 260px;
+    height: 370px;
+
+    object-fit: contain;
+
+    background-color: #f1efe9;
+    border-radius: 6px;
+}
+
+.details-info {
+    flex: 1;
+}
+
+.details-info h2 {
+    margin-top: 0;
+    margin-bottom: .2em;
+
+    font-size: 2.4rem;
+}
+
+.subtitle {
+    margin-bottom: 1.5em;
+
+    color: var(--gray2);
+    font-size: 1.05rem;
+}
+
+.details-info p {
+    line-height: 1.5;
+}
+
+.book-tags {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: .5em;
+
+    margin: 1.2em 0;
+}
+
+.book-tags span {
+    padding: .35em .7em;
+
+    background-color: var(--clr1bg);
+    color: var(--clr1);
+
+    border-radius: 20px;
+
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.book-tags .sale-tag {
+    background-color: var(--clr2bg);
+    color: #944a32;
+}
+
+.book-price {
+    margin: .5em 0 1.2em;
+
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.book-meta {
+    margin-top: 1.5em;
+    padding-top: 1em;
+
+    border-top: 1px solid var(--border);
+}
+
+.book-meta p {
+    margin-bottom: .5em;
+}
+
 .red {
-    color: red;
+    color: #b03a3a;
 }
 
 .green {
-    color: green;
+    color: #267347;
+}
+
+@media (max-width: 700px) {
+    .book-details {
+        padding: 1.4em;
+    }
+
+    .details-main {
+        flex-direction: column;
+    }
+
+    .details-main > img {
+        width: 220px;
+        height: auto;
+
+        margin: auto;
+    }
 }

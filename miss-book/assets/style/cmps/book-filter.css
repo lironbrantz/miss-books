@@ -1,0 +1,48 @@
+.book-filter {
+    margin-bottom: 2.5em;
+    padding: 1.5em;
+
+    background-color: var(--surface);
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .04);
+}
+
+.book-filter h2 {
+    margin-top: 0;
+    margin-bottom: 1em;
+    font-size: 1.5rem;
+}
+
+.book-filter form {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .7em;
+}
+
+.book-filter label {
+    font-weight: 600;
+}
+
+.book-filter input {
+    width: 145px;
+    margin-right: .6em;
+}
+
+.book-filter button {
+    margin: 0;
+}
+
+@media (max-width: 700px) {
+    .book-filter form {
+        display: grid;
+    }
+
+    .book-filter input {
+        width: 100%;
+        margin: 0;
+    }
+}

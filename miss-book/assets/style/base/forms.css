@@ -1,18 +1,39 @@
 button {
     cursor: pointer;
-    background-color: var(--clr2bg);
-    margin: 0.5em;
+
+    margin: .5em;
+    padding: .65em 1em;
+
     border: 0;
-    padding: 0.5em 0.8em;
-    border-radius: 4px;   
+    border-radius: 5px;
+
+    background-color: var(--clr2);
+    color: white;
+
+    font-family: inherit;
+    font-weight: 600;
+
+    transition: .2s;
 }
 
 button:hover {
-    background-color: var(--clr2);
-    color: white;
-    transition: .3s;
+    background-color: var(--clr2bg);
 }
+
+input {
+    padding: .65em .75em;
+
+    border: 1px solid #c9c5be;
+    border-radius: 5px;
+
+    background-color: white;
+    color: var(--gray3);
+
+    font: inherit;
+}
+
 input:focus {
-    background-color: var(--clr1bg);
-    transition: background-color 1s;
+    outline: none;
+    border-color: var(--clr1);
+    background-color: var(--clr1bg-light);
 }
