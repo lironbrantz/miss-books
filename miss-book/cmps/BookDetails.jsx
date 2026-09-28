@@ -1,4 +1,5 @@
 import { bookService } from '../services/book-service.js'
+import { LongTxt } from './LongTxt.jsx'
 
 const { useState, useEffect } = React
 
@@ -43,7 +44,7 @@ function isOnSale() {
             <p>{book.subtitle}</p>
             <p>{book.authors.join(', ')}</p>
             <p>{book.publishedDate}</p>
-            <p>{book.description}</p>
+           <LongTxt txt={book.description} />
             <p>{book.pageCount}</p>
             <p>{book.categories.join(', ')}</p>
             <p>{book.language}</p>
