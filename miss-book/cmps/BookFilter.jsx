@@ -26,8 +26,14 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
             <form onSubmit={onSubmitForm}>
                 <label htmlFor="title">Title: </label>
                 <input value={filterByToEdit.title} onChange={onHandleChange} type="text" id="title" name="title" />
-                <label htmlFor="price">Max Price: </label>
 
+                <label htmlFor="author">Author: </label>
+                <input value={filterByToEdit.author} onChange={onHandleChange} type="text" id="author" name="author" />
+
+                <label htmlFor="language">Language: </label>
+                <input value={filterByToEdit.language} onChange={onHandleChange} type="text" id="language" name="language" />
+
+                <label htmlFor="price">Max Price: </label>
                 <input value={filterByToEdit.price} onChange={onHandleChange} type="number" id="price" name="price" />
                 <button>Submit</button>
             </form>

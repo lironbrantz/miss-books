@@ -20,7 +20,22 @@ function query(filterBy = {}) {
                 const regExp = new RegExp(filterBy.title, 'i')
                 books = books.filter(book => regExp.test(book.title))
             }
+            if (filterBy.author) {
+                const search = filterBy.author.toLowerCase()
 
+                books = books.filter(book =>
+                    book.authors.some(author =>
+                        author.toLowerCase()
+                            .split(' ')
+                            .some(word => word.startsWith(search))
+                    )
+                )
+            }
+
+            if (filterBy.language) {
+                const regExp = new RegExp(filterBy.language, 'i')
+                books = books.filter(book => regExp.test(book.language))
+            }
             if (filterBy.price) {
                 books = books.filter(book => book.listPrice.amount <= filterBy.price)
             }
@@ -67,7 +82,9 @@ function getEmptyBook() {
 function getDefaultFilter() {
     return {
         title: '',
-        price: ''
+        price: '',
+        author: '',
+        language: ''
     }
 }
 
