@@ -1,7 +1,7 @@
 import { bookService } from "../services/book-service.js"
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookList } from '../cmps/BookList.jsx'
-import { BookDetails } from '../cmps/BookDetails.jsx'
+
 
 const { useState, useEffect } = React
 export function BookIndex() {
@@ -10,7 +10,6 @@ export function BookIndex() {
 
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
-    const [selectedBookId, setSelectedBookId] = useState(null)
 
     useEffect(() => {
         loadBooks()
@@ -27,20 +26,16 @@ export function BookIndex() {
             )
     }
 
-    function onSelectedBook(bookId) {
-        setSelectedBookId(bookId)
-    }
+
 
     if (!books) return 'Loading...'
     return (
         <section className="book-index">
             <h1>Books Index</h1>
-            {selectedBookId ? <BookDetails bookId={selectedBookId} onSetSelectedBookId={setSelectedBookId} />
-                : <React.Fragment>
-                    <BookFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
-                    <BookList books={books} onRemoveBook={onRemoveBook} onSelectedBook={onSelectedBook} />
-                 </React.Fragment>
-            }
+            <React.Fragment>
+                <BookFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
+                <BookList books={books} onRemoveBook={onRemoveBook} />
+            </React.Fragment>
         </section>
     )
 }

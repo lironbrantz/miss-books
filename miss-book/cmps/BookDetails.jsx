@@ -2,16 +2,18 @@ import { bookService } from '../services/book-service.js'
 import { LongTxt } from './LongTxt.jsx'
 
 const { useState, useEffect } = React
+const { useParams, Link } = ReactRouterDOM
 
-export function BookDetails({ bookId, onSetSelectedBookId }) {
+export function BookDetails() {
     const [book, setBook] = useState(null)
+    const params = useParams()
 
     useEffect(() => {
         loadBook()
-    }, [bookId])
+    }, [params.bookId])
 
     function loadBook() {
-        bookService.get(bookId)
+        bookService.get(params.bookId)
             .then(book => setBook(book))
     }
     function getReadingLevel() {
@@ -37,44 +39,37 @@ export function BookDetails({ bookId, onSetSelectedBookId }) {
     function isOnSale() {
         return book.listPrice.isOnSale ? 'On Sale' : ''
     }
-   return (
-    <section className="book-details">
-        <button
-            className="back-btn"
-            onClick={() => onSetSelectedBookId(null)}
-        >
-            ← Back to Books
-        </button>
+    return (
+        <section className="book-details">
+            <Link to="/book" className="back-btn">← Back to Books</Link>
 
-        <div className="details-main">
-            <img src={book.thumbnail} alt={book.title} />
+            <div className="details-main">
+                <img src={book.thumbnail} alt={book.title} />
 
-            <div className="details-info">
-                <h2>{book.title}</h2>
-                <p className="subtitle">{book.subtitle}</p>
+                <div className="details-info">
+                    <h2>{book.title}</h2>
+                    <p className="subtitle">{book.subtitle}</p>
 
-                <p><strong>Author:</strong> {book.authors.join(', ')}</p>
-                <p><strong>Published:</strong> {book.publishedDate}</p>
+                    <p><strong>Author:</strong> {book.authors.join(', ')}</p>
+                    <p><strong>Published:</strong> {book.publishedDate}</p>
 
-                <div className="book-tags">
-                    {getReadingLevel() && <span>{getReadingLevel()}</span>}
-                    {getPublishedDate() && <span>{getPublishedDate()}</span>}
-                    {book.listPrice.isOnSale && <span className="sale-tag">On Sale</span>}
-                </div>
+                    <div className="book-tags">
+                        {getReadingLevel() && <span>{getReadingLevel()}</span>}
+                        {getPublishedDate() && <span>{getPublishedDate()}</span>}
+                        {book.listPrice.isOnSale && <span className="sale-tag">On Sale</span>}
+                    </div>
 
-                <p className={`book-price ${getPriceClass()}`}>
-                    {book.listPrice.amount} {book.listPrice.currencyCode}
-                </p>
+                    <p className={`book-price ${getPriceClass()}`}>{book.listPrice.amount} {book.listPrice.currencyCode}</p>
 
-                <LongTxt txt={book.description} />
+                    <LongTxt txt={book.description} />
 
-                <div className="book-meta">
-                    <p><strong>Pages:</strong> {book.pageCount}</p>
-                    <p><strong>Categories:</strong> {book.categories.join(', ')}</p>
-                    <p><strong>Language:</strong> {book.language}</p>
+                    <div className="book-meta">
+                        <p><strong>Pages:</strong> {book.pageCount}</p>
+                        <p><strong>Categories:</strong> {book.categories.join(', ')}</p>
+                        <p><strong>Language:</strong> {book.language}</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-)
+        </section>
+    )
 }
