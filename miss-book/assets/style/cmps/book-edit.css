@@ -1,0 +1,45 @@
+.book-edit {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+.book-edit h2 {
+    margin-bottom: 25px;
+}
+
+.book-edit form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-edit label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.book-edit input,
+.book-edit textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.book-edit textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.book-edit input[type="checkbox"] {
+    width: fit-content;
+}
+
+.book-edit button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+}

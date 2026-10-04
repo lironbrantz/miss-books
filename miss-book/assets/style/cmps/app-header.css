@@ -13,25 +13,35 @@
 
 .app-header h1 {
     margin: 0;
+
     color: white;
     font-size: 2rem;
 }
 
 .app-header nav {
     display: flex;
+    align-items: center;
     gap: .5em;
 }
 
-.app-header button {
-    margin: 0;
+.app-header nav a {
+    padding: .5em .8em;
 
-    border: 1px solid rgba(255, 255, 255, .35);
+    border: 1px solid transparent;
+    border-radius: 6px;
 
-    background-color: transparent;
     color: white;
+    text-decoration: none;
+
+    transition: .2s;
 }
 
-.app-header button:hover {
+.app-header nav a:hover {
+    border-color: rgba(255, 255, 255, .35);
+    background-color: rgba(255, 255, 255, .12);
+}
+
+.app-header nav a[aria-current="page"] {
     border-color: white;
     background-color: white;
     color: var(--clr1);
