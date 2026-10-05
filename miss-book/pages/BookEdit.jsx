@@ -1,4 +1,5 @@
 import { bookService } from '../services/book-service.js'
+import { eventBusService } from '../services/event-bus.service.js'
 
 
 const { useState, useEffect } = React
@@ -12,7 +13,7 @@ export function BookEdit() {
     const { bookId } = useParams()
 
     useEffect(() => {
-     if (bookId) loadBook()
+        if (bookId) loadBook()
     }, [bookId])
 
     function loadBook() {
@@ -23,57 +24,65 @@ export function BookEdit() {
 
 
 
-   function handleChange({ target }) {
-    const { type, name: prop } = target
-    let { value } = target
+    function handleChange({ target }) {
+        const { type, name: prop } = target
+        let { value } = target
 
-    switch (type) {
-        case 'range':
-        case 'number':
-            value = +value
-            break
+        switch (type) {
+            case 'range':
+            case 'number':
+                value = +value
+                break
 
-        case 'checkbox':
-            value = target.checked
-            break
-    }
-
-    setBookToEdit(prevBook => ({
-        ...prevBook,
-        [prop]: value
-    }))
-}
-
-function handleChangeListPrice({ target }) {
-    const { type, name: prop } = target
-    let { value } = target
-
-    switch (type) {
-        case 'range':
-        case 'number':
-            value = +value
-            break
-
-        case 'checkbox':
-            value = target.checked
-            break
-    }
-
-    setBookToEdit(prevBook => ({
-        ...prevBook,
-        listPrice: {
-            ...prevBook.listPrice,
-            [prop]: value
+            case 'checkbox':
+                value = target.checked
+                break
         }
-    }))
-}
+        if (prop === 'authors') {
+            value = value.split(',').map(author => author.trim())
+        }
+
+        setBookToEdit(prevBook => ({
+            ...prevBook,
+            [prop]: value
+        }))
+    }
+
+    function handleChangeListPrice({ target }) {
+        const { type, name: prop } = target
+        let { value } = target
+
+        switch (type) {
+            case 'range':
+            case 'number':
+                value = +value
+                break
+
+            case 'checkbox':
+                value = target.checked
+                break
+        }
+
+        setBookToEdit(prevBook => ({
+            ...prevBook,
+            listPrice: {
+                ...prevBook.listPrice,
+                [prop]: value
+            }
+        }))
+    }
 
     function onSaveBook(ev) {
         ev.preventDefault()
 
         bookService.save(bookToEdit)
             .then(savedBook => {
-                navigate('/book')
+                if (!bookId) {
+                    eventBusService.emit('show-user-msg', {
+                        txt: 'Book added successfully'
+                    })
+                    navigate('/book')
+                }
             })
     }
 
@@ -94,7 +103,7 @@ function handleChangeListPrice({ target }) {
                 <input type="text" id="authors" name="authors" value={authors} onChange={handleChange} />
 
                 <label htmlFor="price">List Price:</label>
-                <input type="number" id="price" name="amount" value={listPrice.amount} onChange={handleChangeListPrice} />
+                <input type="number" id="price" name="amount" value={listPrice.amount || ''} onChange={handleChangeListPrice} />
 
                 <label htmlFor="description">Description:</label>
                 <textarea id="description" name="description" value={description} onChange={handleChange}></textarea>

@@ -1,6 +1,7 @@
 import { bookService } from "../services/book-service.js"
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookList } from '../cmps/BookList.jsx'
+import { eventBusService } from '../services/event-bus.service.js'
 
 const { Link } = ReactRouterDOM
 
@@ -25,6 +26,7 @@ export function BookIndex() {
             .then(() =>
                 setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId))
             )
+            eventBusService.emit('show-user-msg', { txt: 'Book removed successfully' })
     }
 
 
