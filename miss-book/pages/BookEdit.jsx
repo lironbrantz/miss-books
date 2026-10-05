@@ -1,5 +1,5 @@
 import { bookService } from '../services/book-service.js'
-import { eventBusService } from '../services/event-bus.service.js'
+import { showSuccessMsg } from '../services/event-bus.service.js'
 
 
 const { useState, useEffect } = React
@@ -72,19 +72,18 @@ export function BookEdit() {
         }))
     }
 
-    function onSaveBook(ev) {
-        ev.preventDefault()
+ function onSaveBook(ev) {
+    ev.preventDefault()
 
-        bookService.save(bookToEdit)
-            .then(savedBook => {
-                if (!bookId) {
-                    eventBusService.emit('show-user-msg', {
-                        txt: 'Book added successfully'
-                    })
-                    navigate('/book')
-                }
-            })
-    }
+    bookService.save(bookToEdit)
+        .then(savedBook => {
+            if (!bookId) {
+                showSuccessMsg('Book added successfully')
+            }
+
+            navigate('/book')
+        })
+}
 
     const { title, authors, listPrice, description, pageCount } = bookToEdit
     const { amount, isOnSale } = listPrice

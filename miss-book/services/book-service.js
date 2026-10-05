@@ -11,6 +11,8 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    addReview,
+    removeReview,
 }
 
 function query(filterBy = {}) {
@@ -75,7 +77,8 @@ function getEmptyBook() {
             amount: 0,
             currencyCode: 'EUR',
             isOnSale: false
-        }
+        },
+        reviews: []
     }
 }
 
@@ -537,4 +540,24 @@ function _createBooks() {
 
         utilService.saveToStorage(BOOK_KEY, books)
     }
+}
+
+function addReview(bookId, review) {
+    return get(bookId)
+        .then(book => {
+            if (!book.reviews) book.reviews = []
+            book.reviews.push(review)
+
+            return save(book)
+        })
+}
+
+function removeReview(bookId, reviewIdx) {
+    return get(bookId)
+        .then(book => {
+            if (!book.reviews) return
+            book.reviews.splice(reviewIdx, 1)
+
+            return save(book)
+        })
 }

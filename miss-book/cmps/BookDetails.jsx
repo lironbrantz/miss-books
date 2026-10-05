@@ -1,5 +1,7 @@
 import { bookService } from '../services/book-service.js'
 import { LongTxt } from './LongTxt.jsx'
+import { AddReview } from './AddReview.jsx'
+import { showSuccessMsg } from '../services/event-bus.service.js'
 
 const { useState, useEffect } = React
 const { useParams, Link } = ReactRouterDOM
@@ -15,6 +17,13 @@ export function BookDetails() {
     function loadBook() {
         bookService.get(params.bookId)
             .then(book => setBook(book))
+    }
+    function onRemoveReview(reviewIdx) {
+        bookService.removeReview(book.id, reviewIdx)
+            .then(() => {
+                showSuccessMsg('Review removed successfully')
+                loadBook()
+            })
     }
     function getReadingLevel() {
         if (book.pageCount > 500) return 'Serious Reading'
@@ -70,6 +79,18 @@ export function BookDetails() {
                     </div>
                 </div>
             </div>
+            <AddReview bookId={book.id} onReviewAdded={setBook} />
+            <ul>
+                <h2>Reviews</h2>
+                {book.reviews && book.reviews.map((review, idx) => (
+                    <li key={idx}>
+                        <p>name: {review.fullname}</p>
+                        <p>Rating: {review.rating}</p>
+                        <p>Read at: {review.readAt}</p>
+                        <button onClick={() => onRemoveReview(idx)}>Remove</button>
+                    </li>
+                ))}
+            </ul>
         </section>
     )
 }
