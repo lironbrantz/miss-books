@@ -1,0 +1,55 @@
+.add-review {
+    margin-top: 2em;
+    padding-top: 1.5em;
+    border-top: 1px solid #ddd;
+}
+
+.add-review h2 {
+    margin-bottom: 1em;
+}
+
+.add-review form {
+    display: grid;
+    gap: 0.8em;
+}
+
+.add-review label {
+    font-weight: 600;
+}
+
+.add-review input,
+.add-review select {
+    width: 100%;
+    padding: 0.7em;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    font: inherit;
+}
+
+.add-review input:focus,
+.add-review select:focus {
+    outline: none;
+    border-color: var(--clr1);
+}
+
+.add-review button {
+    justify-self: start;
+
+    margin-top: 0.5em;
+    padding: 0.7em 1.2em;
+
+    border: 0;
+    border-radius: 5px;
+
+    background-color: var(--clr1);
+    color: white;
+
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.add-review button:hover {
+    opacity: 0.9;
+}

@@ -1,6 +1,9 @@
 import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
+const CACHE_STORAGE_KEY = 'googleBooksCache'
+const gGoogleBooksCache = utilService.loadFromStorage(CACHE_STORAGE_KEY) || {}
+
 const BOOK_KEY = 'bookDB'
 _createBooks()
 
@@ -13,7 +16,10 @@ export const bookService = {
     getDefaultFilter,
     addReview,
     removeReview,
+    addGoogleBook,
+    getGoogleBooks,
 }
+
 
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
@@ -574,4 +580,61 @@ function _setNextPrevBookId(book) {
 
         return book
     })
+}
+
+function getGoogleBooks(search) {
+    if (!search) return Promise.resolve([])
+
+    const key = search.trim().toLowerCase()
+    if (gGoogleBooksCache[key]) return Promise.resolve(gGoogleBooksCache[key])
+
+    const url = `https://www.googleapis.com/books/v1/volumes?printType=books&q=${encodeURIComponent(search)}`
+
+    return axios.get(url)
+        .then(res => {
+            const books = _formatGoogleBooks(res.data.items || [])
+
+            gGoogleBooksCache[key] = books
+            utilService.saveToStorage(CACHE_STORAGE_KEY, gGoogleBooksCache)
+
+            return books
+        })
+}
+
+function _formatGoogleBooks(googleBooks) {
+    return googleBooks.map(googleBook => {
+        const { volumeInfo } = googleBook
+
+        const book = {
+            id: googleBook.id,
+            title: volumeInfo.title,
+            description: volumeInfo.description,
+            pageCount: volumeInfo.pageCount,
+            authors: volumeInfo.authors,
+            categories: volumeInfo.categories,
+            publishedDate: volumeInfo.publishedDate,
+            language: volumeInfo.language,
+            listPrice: {
+                amount: utilService.getRandomIntInclusive(80, 500),
+                currencyCode: 'EUR',
+                isOnSale: Math.random() > 0.7
+            },
+            reviews: []
+        }
+
+        if (volumeInfo.imageLinks) book.thumbnail = volumeInfo.imageLinks.thumbnail
+
+        return book
+    })
+}
+
+
+function addGoogleBook(book) {
+    return query()
+        .then(books => {
+            const isBookExist = books.some(currBook => currBook.id === book.id)
+            if (isBookExist) return null
+
+            return storageService.post(BOOK_KEY, book, false)
+        })
 }

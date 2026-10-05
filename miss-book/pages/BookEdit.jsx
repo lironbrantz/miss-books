@@ -1,5 +1,7 @@
 import { bookService } from '../services/book-service.js'
 import { showSuccessMsg } from '../services/event-bus.service.js'
+import { BookAdd } from '../cmps/BookAdd.jsx'
+
 
 
 const { useState, useEffect } = React
@@ -20,6 +22,7 @@ export function BookEdit() {
         bookService.get(bookId)
             .then(setBookToEdit)
     }
+
     const navigate = useNavigate()
 
 
@@ -72,18 +75,18 @@ export function BookEdit() {
         }))
     }
 
- function onSaveBook(ev) {
-    ev.preventDefault()
+    function onSaveBook(ev) {
+        ev.preventDefault()
 
-    bookService.save(bookToEdit)
-        .then(savedBook => {
-            if (!bookId) {
-                showSuccessMsg('Book added successfully')
-            }
+        bookService.save(bookToEdit)
+            .then(savedBook => {
+                if (!bookId) {
+                    showSuccessMsg('Book added successfully')
+                }
 
-            navigate('/book')
-        })
-}
+                navigate('/book')
+            })
+    }
 
     const { title, authors, listPrice, description, pageCount } = bookToEdit
     const { amount, isOnSale } = listPrice
@@ -91,6 +94,7 @@ export function BookEdit() {
     return (
         <section className="book-edit">
             <h2>{bookId ? 'Edit Book' : 'Add Book'}</h2>
+            {!bookId && <BookAdd />}
             <form onSubmit={onSaveBook}>
 
                 <label htmlFor="title">Title:</label>

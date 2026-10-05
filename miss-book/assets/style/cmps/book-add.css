@@ -1,0 +1,44 @@
+.book-add {
+    margin-bottom: 2em;
+    padding-bottom: 1.5em;
+    border-bottom: 1px solid #ddd;
+}
+
+.book-add form {
+    display: flex;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+
+.book-add input {
+    flex: 1;
+    padding: 0.7em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font: inherit;
+}
+
+.book-add form button,
+.book-add li button {
+    padding: 0.7em 1em;
+    border: 0;
+    border-radius: 5px;
+    background-color: #18794e;
+    color: white;
+    cursor: pointer;
+}
+
+.book-add ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.book-add li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #eee;
+}

@@ -1,7 +1,8 @@
 import { bookService } from "../services/book-service.js"
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookList } from '../cmps/BookList.jsx'
-import { eventBusService } from '../services/event-bus.service.js'
+import { showSuccessMsg } from '../services/event-bus.service.js'
+
 
 const { Link } = ReactRouterDOM
 
@@ -21,13 +22,14 @@ export function BookIndex() {
         bookService.query(filterBy)
             .then(books => setBooks(books))
     }
-    function onRemoveBook(bookId) {
-        bookService.remove(bookId)
-            .then(() =>
-                setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId))
-            )
-            eventBusService.emit('show-user-msg', { txt: 'Book removed successfully' })
-    }
+    
+  function onRemoveBook(bookId) {
+    bookService.remove(bookId)
+        .then(() => {
+            setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId))
+            showSuccessMsg('Book removed successfully')
+        })
+}
 
 
 
@@ -37,8 +39,9 @@ export function BookIndex() {
             <h1>Books Index</h1>
             <React.Fragment>
                 <BookFilter filterBy={filterBy} onSetFilterBy={setFilterBy} />
-              <Link className="add-book-btn" to="/book/edit">Add Book</Link>
+                <Link className="add-book-btn" to="/book/edit">Add Book</Link>
                 <BookList books={books} onRemoveBook={onRemoveBook} />
+
             </React.Fragment>
         </section>
     )
