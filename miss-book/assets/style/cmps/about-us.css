@@ -1,10 +1,32 @@
-.about-us h2 {
-    margin-top: 0;
-    font-size: 2.2rem;
+.about-us {
+    max-width: 700px;
+    margin: 2em auto;
+    padding: 2em;
+
+    background-color: white;
+    border-radius: 8px;
 }
 
-.about-us p {
-    color: #555;
-    font-size: 1.05rem;
-    line-height: 1.7;
+.about-us nav {
+    display: flex;
+    gap: 1em;
+    margin: 1.5em 0;
+}
+
+.about-us nav a {
+    padding: 0.6em 1em;
+
+    background-color: #18794e;
+    color: white;
+
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.about-us nav a:hover {
+    opacity: 0.85;
+}
+
+.about-us h2 {
+    margin-top: 1em;
 }
