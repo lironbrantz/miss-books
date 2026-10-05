@@ -3,7 +3,7 @@ const { NavLink } = ReactRouterDOM
 export function AppHeader() {
     return (
         <header className="app-header main-layout">
-            <h1>Miss Books</h1>
+            <h1 className="animate__animated animate__fadeInDown">Miss Books</h1>
 
             <nav>
                 <NavLink to="/">Home</NavLink>

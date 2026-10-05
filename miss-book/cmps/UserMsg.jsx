@@ -21,7 +21,7 @@ export function UserMsg() {
     return (
      <section className={`user-msg ${msg.type}`}>
             {msg && <p>{msg.txt}</p>}
-            <button onClick={closeMsg} className="close-btn">X</button>
+        <button onClick={closeMsg} className="close-btn"><i className="fa-solid fa-xmark"></i></button>
         </section>
     )
 }
