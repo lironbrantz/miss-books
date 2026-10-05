@@ -21,7 +21,7 @@
     gap: 2.5em;
 }
 
-.details-main > img {
+.details-main>img {
     width: 260px;
     height: 370px;
 
@@ -114,10 +114,35 @@
         flex-direction: column;
     }
 
-    .details-main > img {
+    .details-main>img {
         width: 220px;
         height: auto;
 
         margin: auto;
     }
+}
+
+.book-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1em;
+
+    margin-top: 2em;
+}
+
+.book-navigation a {
+    padding: 0.6em 1em;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #5b6ee1;
+    color: white;
+
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.book-navigation a:hover {
+    background-color: #4758c7;
 }

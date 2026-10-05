@@ -79,6 +79,12 @@ export function BookDetails() {
                     </div>
                 </div>
             </div>
+
+            <div className="book-navigation">
+                <Link to={`/book/${book.prevBookId}`}>Previous Book</Link>
+                <Link to={`/book/${book.nextBookId}`}>Next Book</Link>
+            </div>
+
             <AddReview bookId={book.id} onReviewAdded={setBook} />
             <ul>
                 <h2>Reviews</h2>
