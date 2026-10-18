@@ -8,9 +8,9 @@ export function UserMsg() {
     useEffect(() => {
         eventBusService.on('show-user-msg', msg => {
             setMsg(msg)
-             setTimeout(closeMsg, 2000)
+            setTimeout(closeMsg, 2000)
         })
-
+        return () => unsubscribe()
     }, [])
 
     function closeMsg() {
@@ -19,9 +19,9 @@ export function UserMsg() {
 
     if (!msg) return null
     return (
-     <section className={`user-msg ${msg.type}`}>
+        <section className={`user-msg ${msg.type}`}>
             {msg && <p>{msg.txt}</p>}
-        <button onClick={closeMsg} className="close-btn"><i className="fa-solid fa-xmark"></i></button>
+            <button onClick={closeMsg} className="close-btn"><i className="fa-solid fa-xmark"></i></button>
         </section>
     )
 }

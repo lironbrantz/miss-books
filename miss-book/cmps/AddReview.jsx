@@ -33,8 +33,13 @@ export function AddReview({ bookId, onReviewAdded }) {
 
         bookService.addReview(bookId, review)
             .then((updatedBook) => {
-               onReviewAdded(updatedBook)
+                onReviewAdded(updatedBook)
                 showSuccessMsg('Review added successfully')
+                setReview({ fullname: '', rating: 1, readAt: '' })
+            })
+            .catch(err => {
+                console.error('Cannot add review:', err)
+                showErrorMsg('Cannot add review')
             })
     }
 

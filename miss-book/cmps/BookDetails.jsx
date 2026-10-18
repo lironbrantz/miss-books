@@ -1,7 +1,7 @@
 import { bookService } from '../services/book-service.js'
 import { LongTxt } from './LongTxt.jsx'
 import { AddReview } from './AddReview.jsx'
-import { showSuccessMsg } from '../services/event-bus.service.js'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 const { useState, useEffect } = React
 const { useParams, Link } = ReactRouterDOM
@@ -17,12 +17,17 @@ export function BookDetails() {
     function loadBook() {
         bookService.get(params.bookId)
             .then(book => setBook(book))
+            .catch(err => console.error('Cannot load book:', err))
     }
     function onRemoveReview(reviewIdx) {
         bookService.removeReview(book.id, reviewIdx)
             .then(() => {
                 showSuccessMsg('Review removed successfully')
                 loadBook()
+                    .catch(err => {
+                        console.error('Cannot remove review:', err)
+                        showErrorMsg('Cannot remove review')
+                    })
             })
     }
     function getReadingLevel() {
@@ -86,8 +91,9 @@ export function BookDetails() {
             </div>
 
             <AddReview bookId={book.id} onReviewAdded={setBook} />
-            <ul>
-                <h2>Reviews</h2>
+        
+               <ul className="reviews-list">
+        
                 {book.reviews && book.reviews.map((review, idx) => (
                     <li key={idx}>
                         <p>name: {review.fullname}</p>

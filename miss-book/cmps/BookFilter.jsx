@@ -18,6 +18,7 @@ export function BookFilter({ filterBy, onSetFilterBy }) {
 
     function onSubmitForm(ev) {
         ev.preventDefault()
+        onSetFilterBy(filterByToEdit)
     }
 
     return (

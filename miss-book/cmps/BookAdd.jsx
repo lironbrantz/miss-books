@@ -1,5 +1,5 @@
 import { bookService } from '../services/book-service.js'
-import { showSuccessMsg } from '../services/event-bus.service.js'
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 const { useState, useEffect, useRef } = React
 
@@ -12,7 +12,9 @@ export function BookAdd() {
         if (!search) return setBooks([])
 
         timeoutId.current = setTimeout(() => {
-            bookService.getGoogleBooks(search).then(setBooks)
+            bookService.getGoogleBooks(search)
+                .then(setBooks)
+                .catch(err => console.error('Cannot search Google Books:', err))
         }, 500)
 
         return () => clearTimeout(timeoutId.current)
@@ -21,13 +23,20 @@ export function BookAdd() {
     function onSearch(ev) {
         ev.preventDefault()
         clearTimeout(timeoutId.current)
-        bookService.getGoogleBooks(search).then(setBooks)
+
+        bookService.getGoogleBooks(search)
+            .then(setBooks)
+            .catch(err => console.error('Cannot search Google Books:', err))
     }
 
     function onAddBook(book) {
         bookService.addGoogleBook(book)
             .then(savedBook => {
                 if (savedBook) showSuccessMsg('Book added successfully')
+            })
+            .catch(err => {
+                console.error('Cannot add book:', err)
+                showErrorMsg('Cannot add book')
             })
     }
 

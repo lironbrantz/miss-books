@@ -101,7 +101,7 @@ function getDefaultFilter() {
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
 
-    if (!books || !books.length) {
+    if (!books) {
         books = [
             {
                 id: 'OXeMG8wNskc',
@@ -608,10 +608,10 @@ function _formatGoogleBooks(googleBooks) {
         const book = {
             id: googleBook.id,
             title: volumeInfo.title,
-            description: volumeInfo.description,
+            description: volumeInfo.description || '',
             pageCount: volumeInfo.pageCount,
-            authors: volumeInfo.authors,
-            categories: volumeInfo.categories,
+            authors: volumeInfo.authors || [],
+            categories: volumeInfo.categories || [],
             publishedDate: volumeInfo.publishedDate,
             language: volumeInfo.language,
             listPrice: {

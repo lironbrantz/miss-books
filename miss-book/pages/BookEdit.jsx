@@ -1,6 +1,6 @@
 import { bookService } from '../services/book-service.js'
-import { showSuccessMsg } from '../services/event-bus.service.js'
 import { BookAdd } from '../cmps/BookAdd.jsx'
+import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
 
 
 
@@ -21,6 +21,10 @@ export function BookEdit() {
     function loadBook() {
         bookService.get(bookId)
             .then(setBookToEdit)
+            .catch(err => {
+                console.error('Cannot load book:', err)
+                showErrorMsg('Cannot load book')
+            })
     }
 
     const navigate = useNavigate()
@@ -83,8 +87,11 @@ export function BookEdit() {
                 if (!bookId) {
                     showSuccessMsg('Book added successfully')
                 }
-
                 navigate('/book')
+            })
+            .catch(err => {
+                console.error('Cannot save book:', err)
+                showErrorMsg('Cannot save book')
             })
     }
 

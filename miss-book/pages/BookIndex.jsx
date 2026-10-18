@@ -2,6 +2,7 @@ import { bookService } from "../services/book-service.js"
 import { BookFilter } from '../cmps/BookFilter.jsx'
 import { BookList } from '../cmps/BookList.jsx'
 import { showSuccessMsg } from '../services/event-bus.service.js'
+import { showErrorMsg } from "../services/event-bus.service.js"
 
 
 const { Link } = ReactRouterDOM
@@ -21,15 +22,23 @@ export function BookIndex() {
     function loadBooks() {
         bookService.query(filterBy)
             .then(books => setBooks(books))
+            .catch(err => {
+                console.error('Cannot load books:', err)
+                showErrorMsg('Cannot load books')
+            })
     }
-    
-  function onRemoveBook(bookId) {
-    bookService.remove(bookId)
-        .then(() => {
-            setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId))
-            showSuccessMsg('Book removed successfully')
-        })
-}
+
+    function onRemoveBook(bookId) {
+        bookService.remove(bookId)
+            .then(() => {
+                setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId))
+                showSuccessMsg('Book removed successfully')
+            })
+            .catch(err => {
+                console.error('Cannot remove book:', err)
+                showErrorMsg('Cannot remove book')
+            })
+    }
 
 
 
