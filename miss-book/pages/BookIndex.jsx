@@ -6,16 +6,20 @@ import { showErrorMsg } from "../services/event-bus.service.js"
 
 
 const { Link } = ReactRouterDOM
+const {useSearchParams} = ReactRouterDOM
 
 const { useState, useEffect } = React
 export function BookIndex() {
 
+    const [SearchParams , setSearchParams] = useSearchParams()
+
     const [books, setBooks] = useState(null)
 
-    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(bookService.getFilterFromSearchParams(SearchParams))
 
 
     useEffect(() => {
+        setSearchParams(filterBy)
         loadBooks()
     }, [filterBy])
 

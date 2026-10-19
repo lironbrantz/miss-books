@@ -18,6 +18,7 @@ export const bookService = {
     removeReview,
     addGoogleBook,
     getGoogleBooks,
+    getFilterFromSearchParams
 }
 
 
@@ -96,6 +97,16 @@ function getDefaultFilter() {
         author: '',
         language: ''
     }
+}
+
+function getFilterFromSearchParams(searchParams) {
+    const filterBy = getDefaultFilter()
+
+    for (const key in filterBy) {
+        filterBy[key] = searchParams.get(key) || ''
+    }
+
+    return filterBy
 }
 
 function _createBooks() {
