@@ -1,0 +1,36 @@
+.chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    height: 250px;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ccc;
+}
+
+.chart li {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.chart li span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: lightblue;
+}
+
+.chart li {
+    position: relative;
+}
+
+.chart li small {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: 8px;
+}
