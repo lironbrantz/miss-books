@@ -1,5 +1,6 @@
 import { bookService } from '../services/book-service.js'
 import { showSuccessMsg } from '../services/event-bus.service.js'
+import { DynamicCmp } from './DynamicCmp.jsx'
 const { useState } = React
 
 export function AddReview({ bookId, onReviewAdded }) {
@@ -8,6 +9,8 @@ export function AddReview({ bookId, onReviewAdded }) {
         rating: 1,
         readAt: ''
     })
+    const [rateBy, setRateBy] = useState('RateBySelect')
+
     function handleChange({ target }) {
         const { type, name: prop } = target
         let { value } = target
@@ -54,7 +57,19 @@ export function AddReview({ bookId, onReviewAdded }) {
                 <input type="text" id="fullname" name="fullname" value={fullname} onChange={handleChange} />
 
                 <label htmlFor="rating">Rating:</label>
-                <input type="number" id="rating" name="rating" min="1" max="5" value={rating} onChange={handleChange} />
+              <DynamicCmp rateBy={rateBy} rating={rating} onSelected={rating => setReview(prev => ({ ...prev, rating }))} />
+                            <label>
+                <input type="radio" name="rateBy" value="RateBySelect" checked={rateBy === 'RateBySelect'} onChange={ev => setRateBy(ev.target.value)} />
+                Select
+            </label>
+               <label>
+                <input type="radio" name="rateBy" value="RateByTextBox" checked={rateBy === 'RateByTextBox'} onChange={ev => setRateBy(ev.target.value)} />
+                Text
+            </label>
+                <label>
+                <input type="radio" name="rateBy" value="RateByStars" checked={rateBy === 'RateByStars'} onChange={ev => setRateBy(ev.target.value)} />
+                Stars
+            </label>
 
                 <label htmlFor="readAt">Read At:</label>
                 <input type="date" id="readAt" name="readAt" value={readAt} onChange={handleChange} />
